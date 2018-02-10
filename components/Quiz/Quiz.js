@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, Image, Linking } from 'react-native';
-import Card from '../common/Card';
+import { Card, ListItem, Button } from 'react-native-elements'
 import CardSection from '../common/CardSection';
-import Button from '../common/Button';
+//import Button from '../common/Button';
 
 class Quiz extends Component {
     constructor(props) {
@@ -33,7 +33,15 @@ class Quiz extends Component {
             <CardSection>
               <View style={thumbnailContainerStyle}>
                 <Text style={headerTextStyle}>{question}</Text>
+                
               </View>
+            </CardSection>
+            <CardSection>
+              <Button
+                  icon={{name: 'code'}}
+                  backgroundColor='#03A9F4'
+                  buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+                  title='VIEW NOW' />
             </CardSection>
         </Card>
         )
