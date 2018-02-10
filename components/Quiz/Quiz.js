@@ -18,6 +18,8 @@ class Quiz extends Component {
             thumbnailContainerStyle,
             headerTextStyle,
             imageStyle
+
+            
           } = styles;
         
         console.log('------props Quiz--------')
