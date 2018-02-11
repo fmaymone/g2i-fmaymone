@@ -6,10 +6,11 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import Question from './components/Question/Question'
 import Test from './containers/Test'
-import quizQuestions from './api/quizQuestions';
+import quizQuestions from './quiz_data.json';
 import Quiz from './components/Quiz/Quiz'
 import update from 'react-addons-update'
 import Result from './components/Result/Result'
+import QuizBuilder from './containers/QuizBuilder'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export default class App extends React.Component {
     this.state = {
      counter: 0,
      questionId: 1,
-     question: '',
+     quiz: [],
      answerOptions: [],
      answer: '',
      result: '',
@@ -33,17 +34,18 @@ export default class App extends React.Component {
   }
 
   componentWillMount() {
-    const shuffledAnswerOptions = quizQuestions.map((question) => this.shuffleArray(question.answers));  
+    //const shuffledAnswerOptions = quizQuestions.results.map((question) => this.shuffleArray(question.correct_answer.concat(question.incorrect_answers)));  
+    const shuffledQuestions = this.shuffleArray(quizQuestions.results);
+
+    console.log(shuffledQuestions[0])
 
     this.setState({
-      question: quizQuestions[0].question,
-      answerOptions: shuffledAnswerOptions[0]
+      quiz: shuffledQuestions[0]
     });
   }
 
   shuffleArray(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
-
 
     while (0 !== currentIndex) {
 
@@ -87,12 +89,15 @@ export default class App extends React.Component {
     }
   }
   handleAnswerSelected(event) {
-    this.setUserAnswer(event.currentTarget.value);
-    if (this.state.questionId < quizQuestions.length) {
-        setTimeout(() => this.setNextQuestion(), 300);
-      } else {
-        setTimeout(() => this.setResults(this.getResults()), 300);
-      }
+    console.log("------------handleAnsqerSelected")
+    console.log(event.currentTarget.value)
+    console.log("------------handleAnsqerSelected")
+    // this.setUserAnswer(event.currentTarget.value);
+    // if (this.state.questionId < quizQuestions.length) {
+    //     setTimeout(() => this.setNextQuestion(), 300);
+    //   } else {
+    //     setTimeout(() => this.setResults(this.getResults()), 300);
+    //   }
   }
   getResults() {
     const answersCount = this.state.answersCount;
@@ -102,16 +107,10 @@ export default class App extends React.Component {
 
     return answersCountKeys.filter((key) => answersCount[key] === maxAnswerCount);
   }
+  
   renderQuiz() {
     return (
-      <Quiz
-        answer={this.state.answer}
-        answerOptions={this.state.answerOptions}
-        questionId={this.state.questionId}
-        question={this.state.question}
-        questionTotal={quizQuestions.length}
-        onAnswerSelected={this.handleAnswerSelected}
-      />
+      <QuizBuilder />
     );
   }
 
@@ -123,11 +122,12 @@ export default class App extends React.Component {
 
   render() {
     return (
-      // <Provider store={createStore(reducers)}>
+      <Provider store={createStore(reducers)}>
         <View style={styles.container}>
-          {this.state.result ? this.renderResult() : this.renderQuiz()}
+          {/* {this.state.result ? this.renderResult() : this.renderQuiz()} */}
+          {this.renderQuiz()}
         </View>
-      // </Provider>
+      </Provider>
     );
   }
 }

@@ -6,7 +6,7 @@
       "type": "boolean",
       "difficulty": "hard",
       "question":
-        "The binary number &quot;101001101&quot; is equivalent to the Decimal number &quot;334&quot;",
+        "The binary number 101001101; is equivalent to the Decimal number &quot;334&quot;",
       "correct_answer": "False",
       "incorrect_answers": ["True"]
     },
