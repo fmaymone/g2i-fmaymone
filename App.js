@@ -12,6 +12,7 @@ import update from 'react-addons-update'
 import Result from './components/Result/Result'
 import QuizBuilder from './containers/QuizBuilder'
 
+
 export default class App extends React.Component {
   constructor(props) {
     
@@ -110,7 +111,8 @@ export default class App extends React.Component {
   
   renderQuiz() {
     return (
-      <QuizBuilder />
+      // <QuizBuilder />
+      <Test />
     );
   }
 
