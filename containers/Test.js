@@ -6,6 +6,7 @@ import AnswerOption from '../components/Question/AnswerOption'
 import appActions from '../actions/appActions'
 import { connect } from 'react-redux'
 import { Card, ListItem, Button } from "react-native-elements"
+import Buttons from '../components/common/Buttons'
 
 class Test extends Component {
 
@@ -15,14 +16,11 @@ class Test extends Component {
   render() {
     return (
         <View>
-            <Text>{this.props.texto}</Text>
-            <Button onPress={() => this.props.mudarTexto()}>Mudar texto</Button>
+           <Buttons></Buttons>
         </View>
     );
   }
 }
-const mapStateToProps = state => {
-  return { texto: state.appReducer.texto };
-};
 
-export default connect(mapStateToProps, appActions)(Test);
+
+export default Test;

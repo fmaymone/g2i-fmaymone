@@ -29,7 +29,8 @@ class Quiz extends Component {
     const answers = [
         {"answer" : 'TRUE'},
         {"answer" : 'FALSE'},
-        {"answer" : 'FALSE'}
+       
+
     ]
     return (
       <View style={styles.container}>
@@ -41,17 +42,27 @@ class Quiz extends Component {
           </Card>
         </View>
         <View style={styles.quarterHeight}>
-          <Card >
+        <Card >
+        <View style={{flexDirection: 'row', justifyContent:'center'}}>
+          
           {
           answers.map((u, i) => {
               return (
                 <View key={i} >
-                  <Text style >{u.answer}</Text>
+                <Button
+                    title={u.answer}
+                    buttonStyle={styles.buttonAnswer}
+                 
+                    textStyle={{color: 'rgba(78, 116, 289, 1)'}}
+                />
+                  
                 </View>
               );
             })
           }  
+          </View>
           </Card>
+          
         </View>
       </View>
     )
@@ -65,7 +76,13 @@ var styles = {
   },
   halfHeight: {
       flex: .5,
-      backgroundColor: 'white'
+      backgroundColor: 'white',
+      flexDirection: 'row'
+  },
+  buttonAnswer: {
+    backgroundColor: 'transparent', 
+    borderColor: 'rgba(78, 116, 289, 1)',
+    borderWidth: 1
   }
 }
 export default Quiz;
