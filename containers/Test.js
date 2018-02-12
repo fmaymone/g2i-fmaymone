@@ -11,16 +11,12 @@ class Test extends Component {
 
   mudarTexto() {
     this.props.dispatch(appActions.mudarTexto('Novo texto'))
-    console.log(appActions.mudarTexto('Novo texto'));
-    console.log(appActions.mudarTexto('Novo texto'));
-    console.log('appActions.mudarTexto');
-    
   }   
   render() {
     return (
         <View>
             <Text>{this.props.texto}</Text>
-            <Button onPress={() => this.mudarTexto()}>Mudar texto</Button>
+            <Button onPress={() => this.props.mudarTexto()}>Mudar texto</Button>
         </View>
     );
   }
@@ -29,4 +25,4 @@ const mapStateToProps = state => {
   return { texto: state.appReducer.texto };
 };
 
-export default connect(mapStateToProps)(Test);
+export default connect(mapStateToProps, appActions)(Test);

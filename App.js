@@ -111,8 +111,8 @@ export default class App extends React.Component {
   
   renderQuiz() {
     return (
-      // <QuizBuilder />
-      <Test />
+      <QuizList />
+      // <Test />
     );
   }
 

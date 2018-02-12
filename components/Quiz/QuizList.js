@@ -1,27 +1,64 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  Button,
+  View,
+  ScrollView
+} from "react-native";
 import { connect } from "react-redux";
 import Quiz from "./Quiz";
+import * as quizActions from "../../actions/quizActions";
 
 class QuizList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { currentQuiz: this.props.quiz_data.results[0] };
-  }
+  handleCurrentQuestionChange = () => {
+    const currentQuestion = this.props.currentQuestion;
+    const questions = this.props.quiz_data.results;
+
+    if (currentQuestion < questions.length - 1) {
+      this.props.selectQuiz(currentQuestion + 1);
+    } else {
+      this.props.selectQuiz(0);
+      this.setQuizOver();
+    }
+  };
+  setQuizOver = () => {
+    //setar no store que o isOver aconteceu
+    console.log("Quiz is over");
+  };
   render() {
-    console.log("pqp ----------------");
-    console.log(this.props.quiz_data);
-    console.log(this.state.currentQuiz);
+    const currentQuestion = this.props.currentQuestion;
+    const questions = this.props.quiz_data.results;
+
     return (
-      
-        <Quiz quiz={this.state.currentQuiz} />
-      
+      <View
+        style={{
+          flex: 2,
+          flexDirection: "column",
+          justifyContent: "space-between",
+          borderRadius: 5,
+          padding: 20
+        }}
+      >
+        <View>
+          <Button
+            title="Muda"
+            onPress={() => this.handleCurrentQuestionChange()}
+          />
+        </View>
+        <View>
+          <Quiz quiz={questions[currentQuestion]} />
+        </View>
+      </View>
     );
   }
 }
-
 const mapStateToProps = state => {
-  return { quiz_data: state.quiz_data };
+  return {
+    quiz_data: state.quiz_data,
+    currentQuestion: state.currentQuestion
+  };
 };
 
-export default connect(mapStateToProps)(QuizList);
+export default connect(mapStateToProps, quizActions)(QuizList);
