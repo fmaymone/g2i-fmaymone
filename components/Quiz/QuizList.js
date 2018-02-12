@@ -12,12 +12,12 @@ import Quiz from "./Quiz"
 import * as quizActions from "../../actions/quizActions"
 
 class QuizList extends Component {
-  handleCurrentQuestionChange = () => {
-    const currentQuestion = this.props.currentQuestion
+  handleCurrentQuestionChange = (value) => {
+    
     const questions = this.props.quiz_data.results
 
-    if (currentQuestion < questions.length - 1) {
-      this.props.selectQuiz(currentQuestion + 1)
+    if (value < questions.length - 1 && value >= 0) {
+      this.props.selectQuiz(value)
     } else {
       this.props.selectQuiz(0)
       this.setQuizOver()
@@ -33,33 +33,46 @@ class QuizList extends Component {
     const questions = this.props.quiz_data.results
 
     return (
-      <View
-        style={{
-          flex: 2,
-          flexDirection: "column",
-          justifyContent: "space-between",
-          borderRadius: 5,
-          padding: 20
-        }}
-      >
-        <View>
-          <Button
-            title="Muda"
-            onPress={() => this.handleCurrentQuestionChange()}
-          />
-        </View>
-        <View>
-          <Quiz quiz={questions[currentQuestion]} />
+    <View style={styles.container}>
+      <View style={styles.quarterHeight}>
+        <View style={styles.buttonsNumberQuiz} >
+          <Button title="Diminui" onPress={() => this.handleCurrentQuestionChange(currentQuestion-1)} />
+          <Button title="Aumenta" onPress={() => this.handleCurrentQuestionChange(currentQuestion+1)} />
         </View>
       </View>
+      <View style={styles.halfHeight}><Quiz quiz={questions[currentQuestion]} /></View>
+      <View style={[styles.quarterHeight, {backgroundColor: '#CCC'}]} />
+    </View>
+  
     )
   }
 }
 const mapStateToProps = state => {
   return {
     quiz_data: state.quiz_data,
-    currentQuestion: state.currentQuestion,
+    currentQuestion: state.selectionReducer,
     quizConfig: state.quizReducer
+  }
+}
+
+var styles = {
+  container: {
+      flex: 1,
+      flexDirection: 'column'
+  },
+  halfHeight: {
+      flex: .5,
+      backgroundColor: '#b3cbff'
+  },
+  quarterHeight: {
+      flex: .25,
+      backgroundColor: '#e6eeff'
+  },
+  buttonsNumberQuiz: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "center"
   }
 }
 

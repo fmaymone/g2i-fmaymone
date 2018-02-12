@@ -1,12 +1,14 @@
+import { FINISH_QUIZ, CHANGE_QUESTION_QUIZ } from './types'
+
 export const selectQuiz = (quizPos) => {
   return {
-    type: 'SELECT_QUIZ',
+    type: CHANGE_QUESTION_QUIZ,
     payload: quizPos
   }
 }
 export const finishQuiz = () => {
   return {
-    type: 'FINISH_QUIZ',
+    type: FINISH_QUIZ,
     payload: null
   }
 }

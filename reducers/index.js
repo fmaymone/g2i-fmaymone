@@ -1,12 +1,10 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 import  quiz_data_reducer from './quiz_data_reducer'
-import SelectionReducer from './SelectionReducer';
-import appReducer from './AppReducer'
 import quizReducer from './QuizReducer'
+import selectionReducer from './SelectionReducer'
 
 export default combineReducers({
   quiz_data: quiz_data_reducer,
-  currentQuestion: SelectionReducer,
-  appReducer: appReducer,
-  quizReducer: quizReducer
-});
+  quizReducer: quizReducer,
+  selectionReducer: selectionReducer
+})

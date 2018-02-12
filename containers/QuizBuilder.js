@@ -16,7 +16,10 @@ class QuizBuilder extends Component {
     result: ""
   };
   renderQuiz() {
-    return <QuizList />;
+    
+    return (
+      <QuizList />
+    )
   }
 
   renderResult() {
@@ -36,4 +39,18 @@ const mapStateToProps = state => {
   };
 };
 
+var styles = {
+  container: {
+      flex: 1,
+      flexDirection: 'column'
+  },
+  halfHeight: {
+      flex: .5,
+      backgroundColor: '#FF3366'
+  },
+  quarterHeight: {
+      flex: .25,
+      backgroundColor: '#000'
+  }
+}
 export default connect(mapStateToProps)(QuizBuilder);
