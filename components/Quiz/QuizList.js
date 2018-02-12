@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 import {
   StyleSheet,
   Text,
@@ -6,30 +6,31 @@ import {
   Button,
   View,
   ScrollView
-} from "react-native";
-import { connect } from "react-redux";
-import Quiz from "./Quiz";
-import * as quizActions from "../../actions/quizActions";
+} from "react-native"
+import { connect } from "react-redux"
+import Quiz from "./Quiz"
+import * as quizActions from "../../actions/quizActions"
 
 class QuizList extends Component {
   handleCurrentQuestionChange = () => {
-    const currentQuestion = this.props.currentQuestion;
-    const questions = this.props.quiz_data.results;
+    const currentQuestion = this.props.currentQuestion
+    const questions = this.props.quiz_data.results
 
     if (currentQuestion < questions.length - 1) {
-      this.props.selectQuiz(currentQuestion + 1);
+      this.props.selectQuiz(currentQuestion + 1)
     } else {
-      this.props.selectQuiz(0);
-      this.setQuizOver();
+      this.props.selectQuiz(0)
+      this.setQuizOver()
     }
-  };
+  }
   setQuizOver = () => {
     //setar no store que o isOver aconteceu
-    console.log("Quiz is over");
-  };
+    console.log("Quiz is over")
+    this.props.finishQuiz()
+  }
   render() {
-    const currentQuestion = this.props.currentQuestion;
-    const questions = this.props.quiz_data.results;
+    const currentQuestion = this.props.currentQuestion
+    const questions = this.props.quiz_data.results
 
     return (
       <View
@@ -51,14 +52,15 @@ class QuizList extends Component {
           <Quiz quiz={questions[currentQuestion]} />
         </View>
       </View>
-    );
+    )
   }
 }
 const mapStateToProps = state => {
   return {
     quiz_data: state.quiz_data,
-    currentQuestion: state.currentQuestion
-  };
-};
+    currentQuestion: state.currentQuestion,
+    quizConfig: state.quizReducer
+  }
+}
 
-export default connect(mapStateToProps, quizActions)(QuizList);
+export default connect(mapStateToProps, quizActions)(QuizList)

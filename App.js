@@ -126,8 +126,7 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(reducers)}>
         <View style={styles.container}>
-          {/* {this.state.result ? this.renderResult() : this.renderQuiz()} */}
-          {this.renderQuiz()}
+          <QuizBuilder />
         </View>
       </Provider>
     );
