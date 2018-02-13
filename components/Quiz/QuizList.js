@@ -38,7 +38,7 @@ class QuizList extends Component {
 }
 const mapStateToProps = state => {
   return {
-    quiz_data: state.quiz_data,
+    quiz_data: state.quizReducer.quizData,
     currentQuestion: state.selectionReducer,
     quizConfig: state.quizReducer
   };

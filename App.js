@@ -11,10 +11,12 @@ import Quiz from './components/Quiz/Quiz'
 import update from 'react-addons-update'
 import Result from './components/Result/Result'
 import QuizBuilder from './containers/QuizBuilder'
+import * as quizActions from "./actions/quizActions";
 
 
 export default class App extends React.Component {
- 
+
+
   render() {
     return (
       <Provider store={createStore(reducers)}>

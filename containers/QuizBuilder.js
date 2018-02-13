@@ -6,12 +6,29 @@ import Quiz from "../components/Quiz/Quiz";
 import { connect } from "react-redux";
 import QuizList from "../components/Quiz/QuizList";
 import Result from "../components/Result/Result";
+import * as quizActions from "../actions/quizActions"
+import axios from 'axios'
 
 class QuizBuilder extends Component {
 
-  
+  componentDidMount(){
+
+    axios.get('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean')
+      .then(res => {
+        console.log('---------------')      
+        this.props.loadQuizData(res.data)
+        console.log(res.data)
+        console.log('---------------')      
+      })
+      .catch(err => {
+        console.log('Error Loading the Data from the API')      
+      });
+
+    console.log("Will Mount")
+  }
+
   renderQuiz() {
-    shuffleArray(this.props.quiz_data.results)
+    //shuffleArray(this.props.quizConfig.quizData.results)
     return <QuizList styles={this.props.styles} />;
   }
 
@@ -28,9 +45,8 @@ class QuizBuilder extends Component {
 
 const mapStateToProps = state => {
   return {
-    quiz_data: state.quiz_data,
     quizConfig: state.quizReducer
   };
 };
 
-export default connect(mapStateToProps)(QuizBuilder);
+export default connect(mapStateToProps, quizActions)(QuizBuilder);
