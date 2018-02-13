@@ -14,119 +14,69 @@ import QuizBuilder from './containers/QuizBuilder'
 
 
 export default class App extends React.Component {
-  constructor(props) {
-    
-    super(props);
-    this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
-    this.state = {
-     counter: 0,
-     questionId: 1,
-     quiz: [],
-     answerOptions: [],
-     answer: '',
-     result: '',
-     answersCount: {
-      nintendo: 0,
-      microsoft: 0,
-      sony: 0
-     }
-    };
-    
-  }
-
-  componentWillMount() {
-    //const shuffledAnswerOptions = quizQuestions.results.map((question) => this.shuffleArray(question.correct_answer.concat(question.incorrect_answers)));  
-    const shuffledQuestions = this.shuffleArray(quizQuestions.results);
-
-    console.log(shuffledQuestions[0])
-
-    this.setState({
-      quiz: shuffledQuestions[0]
-    });
-  }
-
-  shuffleArray(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (0 !== currentIndex) {
-
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-  };
-  
-  setNextQuestion() {
-    const counter = this.state.counter + 1;
-    const questionId = this.state.questionId + 1;
-    this.setState({
-      counter: counter,
-      questionId: questionId,
-      question: quizQuestions[counter].question,
-      answerOptions: quizQuestions[counter].answers,
-      answer: ''
-    });
-  }  
-  
-  setUserAnswer(answer) {
-    const updatedAnswersCount = update(this.state.answersCount, {
-      [answer]: {$apply: (currentValue) => currentValue + 1}
-    });
-    this.setState({
-      answersCount: updatedAnswersCount,
-      answer: answer
-    });
-  }
-  setResults (result) {
-    if (result.length === 1) {
-      this.setState({ result: result[0] });
-    } else {
-      this.setState({ result: 'Undetermined' });
-    }
-  }
-  handleAnswerSelected(event) {
-    console.log("------------handleAnsqerSelected")
-    console.log(event.currentTarget.value)
-    console.log("------------handleAnsqerSelected")
-    // this.setUserAnswer(event.currentTarget.value);
-    // if (this.state.questionId < quizQuestions.length) {
-    //     setTimeout(() => this.setNextQuestion(), 300);
-    //   } else {
-    //     setTimeout(() => this.setResults(this.getResults()), 300);
-    //   }
-  }
-  getResults() {
-    const answersCount = this.state.answersCount;
-    const answersCountKeys = Object.keys(answersCount);
-    const answersCountValues = answersCountKeys.map((key) => answersCount[key]);
-    const maxAnswerCount = Math.max.apply(null, answersCountValues);
-
-    return answersCountKeys.filter((key) => answersCount[key] === maxAnswerCount);
-  }
-  
-  renderQuiz() {
-    return (
-      <QuizList />
-      // <Test />
-    );
-  }
-
-  renderResult() {
-    return (
-      <Result quizResult={this.state.result} />
-    );
-  }
-
+ 
   render() {
     return (
       <Provider store={createStore(reducers)}>
-           <QuizList />
+           <QuizBuilder styles={styles} /> 
+           {/* <Test styles={styles} /> */}
       </Provider>
     );
   }
 }
+
+const styles = {
+  container: {
+    flex: 1,
+    backgroundColor: "#374046"
+  },
+  halfHeight: {
+    flex: 0.5,
+    backgroundColor: "#FF3366"
+  },
+  quarterHeight: {
+    flex: 0.25,
+    backgroundColor: "#000"
+  },
+
+  navBar: {
+    flexDirection: "row",
+    paddingTop: 30,
+    height: 64,
+    backgroundColor: "#1EAAF1"
+  },
+  navBarButton: {
+    color: "#FFFFFF",
+    textAlign: "center",
+    width: 64
+  },
+  navBarHeader: {
+    flex: 1,
+    color: "#FFFFFF",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+
+  content: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#374046"
+  },
+  text: {
+    color: "#EEEEEE"
+  },
+
+  tabBar: {
+    flexDirection: "row",
+    height: 50
+  },
+  tabBarButton: {
+    flex: 1
+  },
+  button1: { backgroundColor: "#8BC051" },
+  button2: { backgroundColor: "#CCD948" },
+  button3: { backgroundColor: "#FDE84D" },
+  button4: { backgroundColor: "#FCBF2E" },
+  button5: { backgroundColor: "#FC9626" }
+};

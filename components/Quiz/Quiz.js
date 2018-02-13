@@ -5,6 +5,7 @@ import CardSection from "../common/CardSection";
 import { shuffleArray } from "../../util/functions";
 import * as quizActions from "../../actions/quizActions"
 import { connect } from "react-redux"
+
 //import Button from '../common/Button';
 
 class Quiz extends Component {
@@ -37,7 +38,7 @@ class Quiz extends Component {
     });
 
     //add to state
-    return allAnswers
+    return shuffleArray(allAnswers)
   };
 
   handleButtonPress = value => {
@@ -54,35 +55,39 @@ class Quiz extends Component {
 
   render() {
     const { category, correct_answer, difficulty, question } = this.props.quiz;
+    
     const answers = this.processAnswers()
     
     return (
-      <View style={styles.container}>
-        <View style={styles.quarterHeight}>
-          <Card title={"Category: " + category + "Level: " + difficulty}>
+      <View style={styles.content}>
+        <View style={styles.question}>
+          <Card title={"Category: " + category } style={styles.container}>
             <Text style={{ marginBottom: 10 }}>{question}</Text>
           </Card>
         </View>
-        <View style={styles.quarterHeight}>
-          <Card>
-            <View style={{ flexDirection: "row", justifyContent: "center" }}>
+        <View style={styles.answer}>
+          <Card >
+            <View style={{ flexDirection: "row", justifyContent: "center", flex: 1 }}>
               {answers.map((u, i) => {
-                return (
-                  
-                  <View key={i}>
-                    <Button
-                      title={u.answer}
-                      buttonStyle={styles.buttonAnswer}
-                      textStyle={styles.textButtonAnswer}
-                      onPress={() => this.handleButtonPress(u) }
-                    />
-                  </View>
-                );
-              })}
+                  return (
+                    
+                    <View key={i} >
+                      <Button
+                        title={u.answer}
+                        buttonStyle={styles.buttonAnswer}
+                        textStyle={styles.textButtonAnswer}
+                        onPress={() => this.handleButtonPress(u) }
+                      />
+                    </View>
+                  );
+                })}
+
             </View>
           </Card>
         </View>
       </View>
+   
+   
     );
   }
 }
@@ -92,10 +97,28 @@ var styles = {
     flex: 1,
     flexDirection: "column"
   },
-  halfHeight: {
-    flex: 0.5,
+
+  content: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "red"
+  },
+  question: {
+    flex: 2,
     backgroundColor: "white",
     flexDirection: "row"
+  },
+  answer: {
+    flex: 1,
+    backgroundColor: "white",
+    flexDirection: "row"
+  },
+  answerButtons: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#374046"
   },
   buttonAnswer: {
     backgroundColor: "transparent",
