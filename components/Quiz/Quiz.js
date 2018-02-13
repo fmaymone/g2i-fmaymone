@@ -20,7 +20,7 @@ class Quiz extends Component {
   changeQuestion = value => {
     const questions = this.props.quiz_data.results;
 
-    if (value < questions.length - 1 && value >= 0) {
+    if (value < questions.length  && value >= 0) {
       this.props.selectQuiz(value);
     } else {
       this.props.selectQuiz(0);
@@ -28,7 +28,7 @@ class Quiz extends Component {
     }
   };
   setQuizOver = () => {
-    this.props.finishQuiz();
+    this.props.finishQuiz(true);
   };
 
   processAnswers = () => {

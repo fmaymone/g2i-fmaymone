@@ -8,7 +8,7 @@ const initialStateQuiz = {
 export default (state = initialStateQuiz, action) => {
     switch (action.type) {
         case FINISH_QUIZ:
-             return { ...state, isFinished: true}
+             return { ...state, isFinished: action.payload}
        
          default:
               return state

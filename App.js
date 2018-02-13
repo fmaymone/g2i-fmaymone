@@ -113,6 +113,11 @@ const styles = {
     alignItems: "center",
     backgroundColor: "#374046"
   },
+  buttonPlayAgain:{
+    backgroundColor: "transparent",
+    borderColor: "white",
+    borderWidth: 1
+  },
   buttonAnswer: {
     backgroundColor: "transparent",
     borderColor: "rgba(78, 116, 289, 1)",

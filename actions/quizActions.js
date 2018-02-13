@@ -1,4 +1,4 @@
-import { FINISH_QUIZ, CHANGE_QUESTION_QUIZ, ADD_ANSWER_QUIZ } from './types'
+import { FINISH_QUIZ, CHANGE_QUESTION_QUIZ, ADD_ANSWER_QUIZ, RESET_QUIZ } from './types'
 
 export const selectQuiz = (quizPos) => {
   return {
@@ -6,10 +6,10 @@ export const selectQuiz = (quizPos) => {
     payload: quizPos
   }
 }
-export const finishQuiz = () => {
+export const finishQuiz = (value) => {
   return {
     type: FINISH_QUIZ,
-    payload: null
+    payload: value
   }
 }
 
@@ -20,6 +20,15 @@ export const answerQuestion = (answer) => {
     payload: answer
   }
 }
+
+export const resetQuiz = () => {
+
+  return {
+    type: RESET_QUIZ,
+    payload: answer
+  }
+}
+
 
 
   

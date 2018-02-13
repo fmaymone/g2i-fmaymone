@@ -1,10 +1,25 @@
 import React, { Component } from "react";
 import { Text, View } from "react-native";
-import { Badge } from "react-native-elements";
+import { Badge, Button } from "react-native-elements";
 import { connect } from "react-redux";
 import { APP_TITLE } from "../../config/QuizConfiguration";
+import * as quizActions from "../../actions/quizActions";
+import { shuffleArray } from "../../util/functions";
+
 
 class Result extends Component {
+  handlePlayAgain = () => {
+
+    //restart the quiz
+    this.props.finishQuiz(false);
+    //shuffle the questions
+    //shuffleArray(this.props.quiz_data)
+    //set the index to zero again
+    this.props.selectQuiz(0);
+
+    
+  }
+  
   calculateAnswers = () => {
     const answers = this.props.answers.answers;
     let rightAnswers = 0;
@@ -31,12 +46,22 @@ class Result extends Component {
           </View>
           <View style={styles.halfHeight}>
             <Text style={styles.text}>You answer</Text>
-            <Badge value={this.calculateAnswers()} textStyle={{ color: "orange" }} />
+            <Badge
+              value={this.calculateAnswers()}
+              textStyle={{ color: "orange" }}
+            />
             <Text style={styles.text}>questions correctly!!!</Text>
           </View>
         </View>
         <View style={styles.halfHeight}>
-          <Text>Metade</Text>
+          <View >
+            <Button
+              title="Play Again!!!"
+              buttonStyle={styles.buttonPlayAgain}
+              textStyle={styles.textButtonPlayAgain}
+              onPress={() => this.handlePlayAgain()}
+            />
+          </View>
         </View>
       </View>
     );
@@ -45,8 +70,9 @@ class Result extends Component {
 
 const mapStateToProps = state => {
   return {
+    quiz_data: state.quiz_data,
     answers: state.answersReducer
   };
 };
 
-export default connect(mapStateToProps)(Result);
+export default connect(mapStateToProps, quizActions)(Result);
