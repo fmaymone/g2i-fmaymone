@@ -31,8 +31,10 @@ const styles = {
     backgroundColor: "#374046"
   },
   halfHeight: {
+    justifyContent: "center",
+    alignItems: "center",
     flex: 0.5,
-    backgroundColor: "#FF3366"
+   // backgroundColor: "#FF3366"
   },
   quarterHeight: {
     flex: 0.25,
@@ -66,6 +68,22 @@ const styles = {
   text: {
     color: "#EEEEEE"
   },
+  
+  halfView: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+    backgroundColor: "red"
+  },
+
+  questionView: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: "red"
+
+  },
 
   tabBar: {
     flexDirection: "row",
@@ -78,5 +96,29 @@ const styles = {
   button2: { backgroundColor: "#CCD948" },
   button3: { backgroundColor: "#FDE84D" },
   button4: { backgroundColor: "#FCBF2E" },
-  button5: { backgroundColor: "#FC9626" }
+  button5: { backgroundColor: "#FC9626" },
+  question: {
+    flex: 2,
+    backgroundColor: "white",
+    flexDirection: "row"
+  },
+  answer: {
+    flex: 1,
+    backgroundColor: "white",
+    flexDirection: "row"
+  },
+  answerButtons: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#374046"
+  },
+  buttonAnswer: {
+    backgroundColor: "transparent",
+    borderColor: "rgba(78, 116, 289, 1)",
+    borderWidth: 1
+  },
+  textButtonAnswer: {
+    color: "rgba(78, 116, 289, 1)"
+  }
 };

@@ -1,42 +1,48 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Text, View } from "react-native";
+import { Badge } from "react-native-elements";
 import { connect } from "react-redux";
+import { APP_TITLE } from "../../config/QuizConfiguration";
 
 class Result extends Component {
-  
-  calculateAnswers = () =>{
+  calculateAnswers = () => {
+    const answers = this.props.answers.answers;
+    let rightAnswers = 0;
 
-    const answers = this.props.answers.answers
-    let rightAnswers = 0
-    
     answers.forEach(element => {
-      if(element.value.isCorrect){
-        rightAnswers++
+      if (element.value.isCorrect) {
+        rightAnswers++;
       }
     });
-  
-    return rightAnswers
-  
-  }
-  render() { 
-    const styles = this.props.styles
-    return (  
+
+    return rightAnswers;
+  };
+  render() {
+    const styles = this.props.styles;
+
+    return (
       <View style={styles.container}>
-      <View style={styles.navBar}>
-        <Text style={styles.navBarButton}>Back</Text>
-        <Text style={styles.navBarHeader}>Awesome App</Text>
-        <Text style={styles.navBarButton}>More</Text>
+        <View style={styles.navBar}>
+          <Text style={styles.navBarHeader}>{APP_TITLE}</Text>
+        </View>
+        <View style={styles.halfHeight}>
+          <View style={styles.halfHeight}>
+            <Text style={styles.text}>Congratulations!!!</Text>
+          </View>
+          <View style={styles.halfHeight}>
+            <Text style={styles.text}>You answer</Text>
+            <Badge value={this.calculateAnswers()} textStyle={{ color: "orange" }} />
+            <Text style={styles.text}>questions correctly!!!</Text>
+          </View>
+        </View>
+        <View style={styles.halfHeight}>
+          <Text>Metade</Text>
+        </View>
       </View>
-      <View style={styles.content}>
-        <Text style={styles.text}>Congratulations!!!You have finished the Quiz!</Text>
-      </View>
-      <View style={styles.tabBar}>
-      </View>
-    </View>
-    )
+    );
   }
 }
- 
+
 const mapStateToProps = state => {
   return {
     answers: state.answersReducer

@@ -12,9 +12,24 @@ class Quiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      answers: []
+      answers: [],
+      hasAnswered: false,
+      userAnswer: ''
     };
   }
+  changeQuestion = value => {
+    const questions = this.props.quiz_data.results;
+
+    if (value < questions.length - 1 && value >= 0) {
+      this.props.selectQuiz(value);
+    } else {
+      this.props.selectQuiz(0);
+      this.setQuizOver();
+    }
+  };
+  setQuizOver = () => {
+    this.props.finishQuiz();
+  };
 
   processAnswers = () => {
     const allAnswers = [];
@@ -36,7 +51,7 @@ class Quiz extends Component {
       };
       allAnswers.push(tempAnswerObject);
     });
-
+    
     //add to state
     return shuffleArray(allAnswers)
   };
@@ -50,19 +65,27 @@ class Quiz extends Component {
       }
       
     };
+    this.setState({userAnswer: value.answer})
     this.props.answerQuestion(tempAnswerObject)
+    this.changeQuestion(this.props.currentQuestion+1)
   };
 
   render() {
     const { category, correct_answer, difficulty, question } = this.props.quiz;
     
     const answers = this.processAnswers()
-    
+    const styles = this.props.styles
+    const hasAnswered = this.state.hasAnswered;
+    let icon = null
+  
     return (
+      
+      
       <View style={styles.content}>
         <View style={styles.question}>
-          <Card title={"Category: " + category } style={styles.container}>
-            <Text style={{ marginBottom: 10 }}>{question}</Text>
+          <Card title={"Category: " + category } style={styles.questionView}>
+            <View><Text style={{ marginBottom: 10 }}>{question}</Text></View>
+            <View><Text style={{ marginTop: 50 ,  textAlign: "center" }}>YOUR ANSWER: {this.state.userAnswer}</Text></View>
           </Card>
         </View>
         <View style={styles.answer}>
@@ -92,47 +115,13 @@ class Quiz extends Component {
   }
 }
 
-var styles = {
-  container: {
-    flex: 1,
-    flexDirection: "column"
-  },
 
-  content: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "red"
-  },
-  question: {
-    flex: 2,
-    backgroundColor: "white",
-    flexDirection: "row"
-  },
-  answer: {
-    flex: 1,
-    backgroundColor: "white",
-    flexDirection: "row"
-  },
-  answerButtons: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#374046"
-  },
-  buttonAnswer: {
-    backgroundColor: "transparent",
-    borderColor: "rgba(78, 116, 289, 1)",
-    borderWidth: 1
-  },
-  textButtonAnswer: {
-    color: "rgba(78, 116, 289, 1)"
-  }
-};
 
 const mapStateToProps = state => {
   return {
-    currentQuestion: state.selectionReducer
+    quiz_data: state.quiz_data,
+    currentQuestion: state.selectionReducer,
+    quizConfig: state.quizReducer
     
   }
 }

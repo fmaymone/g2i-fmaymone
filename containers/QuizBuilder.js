@@ -20,7 +20,7 @@ class QuizBuilder extends Component {
   }
   render() {
     const styles = this.props.styles
-    return !this.props.quizConfig.isFinished
+    return this.props.quizConfig.isFinished
       ? this.renderResult()
       : this.renderQuiz();
   }
