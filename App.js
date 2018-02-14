@@ -66,7 +66,7 @@ const styles = {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#374046"
+    backgroundColor: "white"
   },
   text: {
     color: "#EEEEEE"
@@ -84,10 +84,16 @@ const styles = {
     alignItems: "center",
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "red"
+    //backgroundColor: "red",
+    marginLeft: 10,
+    marginRight: 10
 
   },
-
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10
+  },
   tabBar: {
     flexDirection: "row",
     height: 50
@@ -102,13 +108,26 @@ const styles = {
   button5: { backgroundColor: "#FC9626" },
   question: {
     flex: 2,
-    backgroundColor: "white",
-    flexDirection: "row"
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textQuestionCategory:{
+    color: "#EEEEEE",
+    fontWeight: 'bold'
+
+  },
+  textQuestion:{
+    color: "#EEEEEE",
+    
+
   },
   answer: {
     flex: 1,
-    backgroundColor: "white",
-    flexDirection: "row"
+    backgroundColor: "black",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   answerButtons: {
     flex: 1,
@@ -123,10 +142,10 @@ const styles = {
   },
   buttonAnswer: {
     backgroundColor: "transparent",
-    borderColor: "rgba(78, 116, 289, 1)",
+    borderColor: "white",
     borderWidth: 1
   },
   textButtonAnswer: {
-    color: "rgba(78, 116, 289, 1)"
+    color: "white"
   }
 };

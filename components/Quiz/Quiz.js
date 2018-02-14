@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Text, View, Image, Linking } from "react-native";
+import { Text, View, Image, Linking, WebView } from "react-native";
 import { Card, ListItem, Button, StyleSheet } from "react-native-elements";
 import CardSection from "../common/CardSection";
 import { shuffleArray } from "../../util/functions";
-import * as quizActions from "../../actions/quizActions"
-import { connect } from "react-redux"
+import * as quizActions from "../../actions/quizActions";
+import { connect } from "react-redux";
+import HTML from 'react-native-render-html';
 
 //import Button from '../common/Button';
 
@@ -13,14 +14,13 @@ class Quiz extends Component {
     super(props);
     this.state = {
       answers: [],
-      hasAnswered: false,
-      userAnswer: ''
+      userAnswer: ""
     };
   }
   changeQuestion = value => {
     const questions = this.props.quiz_data.results;
 
-    if (value < questions.length  && value >= 0) {
+    if (value < questions.length && value >= 0) {
       this.props.selectQuiz(value);
     } else {
       this.props.selectQuiz(0);
@@ -51,80 +51,67 @@ class Quiz extends Component {
       };
       allAnswers.push(tempAnswerObject);
     });
-    
+
     //add to state
-    return shuffleArray(allAnswers)
+    return shuffleArray(allAnswers);
   };
 
   handleButtonPress = value => {
-
     const tempAnswerObject = {
       id: this.props.currentQuestion,
-      value:{
+      value: {
         isCorrect: value.isCorrect
       }
-      
     };
-    this.setState({userAnswer: value.answer})
-    this.props.answerQuestion(tempAnswerObject)
-    this.changeQuestion(this.props.currentQuestion+1)
+    this.setState({ userAnswer: value.answer });
+    this.props.answerQuestion(tempAnswerObject);
+    this.changeQuestion(this.props.currentQuestion + 1);
   };
 
   render() {
     const { category, correct_answer, difficulty, question } = this.props.quiz;
-    
-    const answers = this.processAnswers()
-    const styles = this.props.styles
-    const hasAnswered = this.state.hasAnswered;
-    let icon = null
-  
+
+    const answers = this.processAnswers();
+    const styles = this.props.styles;
+    let icon = null;
+
     return (
-      
-      
       <View style={styles.content}>
         <View style={styles.question}>
-          <Card title={"Category: " + category } style={styles.questionView}>
-            <View><Text style={{ marginBottom: 10 }}>{question}</Text></View>
-            
-          </Card>
+          <View style={styles.questionView}>
+            <HTML tagsStyles={{textAlign: 'center', color: 'white' }}  html = {question}></HTML>
+            {/* <Text style={styles.textQuestion}> {question} </Text> */}
+          </View>
         </View>
         <View style={styles.answer}>
-          <Card >
-            <View style={{ flexDirection: "row", justifyContent: "center", flex: 1 }}>
-              {answers.map((u, i) => {
-                  return (
-                    
-                    <View key={i} >
-                      <Button
-                        title={u.answer}
-                        buttonStyle={styles.buttonAnswer}
-                        textStyle={styles.textButtonAnswer}
-                        onPress={() => this.handleButtonPress(u) }
-                      />
-                    </View>
-                  );
-                })}
-
-            </View>
-          </Card>
+          <View
+            style={{ flexDirection: "row", justifyContent: "center", flex: 1 }}
+          >
+            {answers.map((u, i) => {
+              return (
+                <View key={i}>
+                  <Button
+                    title={u.answer}
+                    buttonStyle={styles.buttonAnswer}
+                    textStyle={styles.textButtonAnswer}
+                    onPress={() => this.handleButtonPress(u)}
+                  />
+                </View>
+              );
+            })}
+          </View>
         </View>
       </View>
-   
-   
     );
   }
 }
-
-
 
 const mapStateToProps = state => {
   return {
     quiz_data: state.quizReducer.quizData,
     currentQuestion: state.selectionReducer,
     quizConfig: state.quizReducer
-    
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, quizActions)(Quiz)
-
+export default connect(mapStateToProps, quizActions)(Quiz);

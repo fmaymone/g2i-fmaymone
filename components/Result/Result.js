@@ -6,20 +6,13 @@ import { APP_TITLE } from "../../config/QuizConfiguration";
 import * as quizActions from "../../actions/quizActions";
 import { shuffleArray } from "../../util/functions";
 
-
 class Result extends Component {
   handlePlayAgain = () => {
-
     //restart the quiz
     this.props.finishQuiz(false);
-    //shuffle the questions
-    //shuffleArray(this.props.quiz_data)
-    //set the index to zero again
     this.props.selectQuiz(0);
+  };
 
-    
-  }
-  
   calculateAnswers = () => {
     const answers = this.props.answers.answers;
     let rightAnswers = 0;
@@ -30,7 +23,7 @@ class Result extends Component {
       }
     });
 
-    return rightAnswers;
+    return (rightAnswers/answers.length*100).toFixed(2);
   };
   render() {
     const styles = this.props.styles;
@@ -47,14 +40,14 @@ class Result extends Component {
           <View style={styles.halfHeight}>
             <Text style={styles.text}>You answer</Text>
             <Badge
-              value={this.calculateAnswers()}
+              value={this.calculateAnswers()+'%'}
               textStyle={{ color: "orange" }}
             />
-            <Text style={styles.text}>questions correctly!!!</Text>
+            <Text style={styles.text}>of questions correctly!!!</Text>
           </View>
         </View>
         <View style={styles.halfHeight}>
-          <View >
+          <View>
             <Button
               title="Play Again!!!"
               buttonStyle={styles.buttonPlayAgain}
