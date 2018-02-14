@@ -6,25 +6,36 @@ import Quiz from "../components/Quiz/Quiz";
 import { connect } from "react-redux";
 import QuizList from "../components/Quiz/QuizList";
 import Result from "../components/Result/Result";
-import * as quizActions from "../actions/quizActions"
-import axios from 'axios'
+import * as quizActions from "../actions/quizActions";
+import axios from "axios";
+
+const API =
+  "https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean";
 
 class QuizBuilder extends Component {
+  constructor(props) {
+    super(props);
 
-  componentDidMount(){
+    this.state = {
+      quizData: [],
+      isLoading: true,
+      error: null
+    };
+  }
 
-    axios.get('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean')
-      .then(res => {
-        console.log('---------------')      
-        this.props.loadQuizData(res.data)
-        console.log(res.data)
-        console.log('---------------')      
+  componentDidMount() {
+    fetch(API)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Something went wrong ...");
+        }
       })
-      .catch(err => {
-        console.log('Error Loading the Data from the API')      
-      });
-
-    console.log("Will Mount")
+      .then(
+        data => this.setState({ quizData: data, isLoading: false }
+       ))
+      .catch(error => this.setState({ error, isLoading: false }));
   }
 
   renderQuiz() {
@@ -33,13 +44,24 @@ class QuizBuilder extends Component {
   }
 
   renderResult() {
-    return <Result styles={this.props.styles}/>;
+    return <Result styles={this.props.styles} />;
   }
   render() {
-    const styles = this.props.styles
-    return this.props.quizConfig.isFinished
+    const { quizData, isLoading, error } = this.state;
+
+    const styles = this.props.styles;
+    if (error) {
+      return <p>{error.message}</p>;
+    }
+
+    if (isLoading) {
+      return <Text>"Is Loading" </Text>
+    }else{
+      this.props.quizConfig.quizData = this.state.quizData
+      return this.props.quizConfig.isFinished
       ? this.renderResult()
       : this.renderQuiz();
+    }
   }
 }
 

@@ -14,15 +14,16 @@ import QuizBuilder from './containers/QuizBuilder'
 import * as quizActions from "./actions/quizActions";
 
 
+
 export default class App extends React.Component {
 
 
   render() {
     return (
       <Provider store={createStore(reducers)}>
-           <QuizBuilder styles={styles} /> 
-           {/* <Test styles={styles} /> */}
-      </Provider>
+          <QuizBuilder styles={styles} />   
+          {/* <Test styles={styles} /> */}
+     </Provider>
     );
   }
 }

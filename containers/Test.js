@@ -6,15 +6,48 @@ import AnswerOption from "../components/Question/AnswerOption";
 import { connect } from "react-redux";
 import { Card, ListItem, Button } from "react-native-elements";
 import Buttons from "../components/common/Buttons";
-import { styles } from '../config/QuizConfiguration'
+import { styles } from "../config/QuizConfiguration";
+import { BulletList } from "react-content-loader";
+
+const API =
+  "https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean";
+const DEFAULT_QUERY = "redux";
+
 
 class Test extends Component {
-  mudarTexto() {
-    this.props.dispatch(appActions.mudarTexto("Novo texto"));
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      quizData: [],
+      isLoading: false,
+      error: null
+    };
+  }
+  componentDidMount() {
+    fetch(API)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Something went wrong ...");
+        }
+      })
+      .then(data => this.setState({ quizData: data, isLoading: false }))
+      .catch(error => this.setState({ error, isLoading: false }));
   }
 
   render() {
-    const styles = this.props.styles
+    const styles = this.props.styles;
+    const { quizData, isLoading, error } = this.state;
+    console.log(quizData);
+    if (error) {
+      return <p>{error.message}</p>;
+    }
+
+    if (isLoading) {
+    return <Text>"Is Loading" </Text>
+    }
     return (
       <View style={styles.container}>
         <View style={styles.navBar}>
@@ -24,6 +57,7 @@ class Test extends Component {
         </View>
         <View style={styles.content}>
           <Text style={styles.text}>Welcome to Awesome App!</Text>
+         
         </View>
         <View style={styles.tabBar}>
           <View style={[styles.tabBarButton, styles.button1]} />
@@ -36,7 +70,5 @@ class Test extends Component {
     );
   }
 }
-
-
 
 export default Test;
