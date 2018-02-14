@@ -13,7 +13,6 @@ import * as quizActions from "../../actions/quizActions";
 import Header from "../Header/Header";
 
 class QuizList extends Component {
-  
   render() {
     const currentQuestion = this.props.currentQuestion;
     const questions = this.props.quiz_data.results;
@@ -21,17 +20,10 @@ class QuizList extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.navBar}>
-          
-          <Text style={styles.navBarHeader}>G2I Awesome Quiz</Text>
-          
-        </View>
+      
         <View style={styles.content}>
           <Quiz quiz={questions[currentQuestion]} styles={styles} />
         </View>
-
-        
-        
       </View>
     );
   }

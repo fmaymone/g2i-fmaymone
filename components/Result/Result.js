@@ -23,16 +23,14 @@ class Result extends Component {
       }
     });
 
-    return (rightAnswers/answers.length*100).toFixed(2);
+    return (rightAnswers / answers.length * 100).toFixed(2);
   };
   render() {
     const styles = this.props.styles;
 
     return (
       <View style={styles.container}>
-        <View style={styles.navBar}>
-          <Text style={styles.navBarHeader}>{APP_TITLE}</Text>
-        </View>
+      
         <View style={styles.halfHeight}>
           <View style={styles.halfHeight}>
             <Text style={styles.text}>Congratulations!!!</Text>
@@ -40,7 +38,7 @@ class Result extends Component {
           <View style={styles.halfHeight}>
             <Text style={styles.text}>You answer</Text>
             <Badge
-              value={this.calculateAnswers()+'%'}
+              value={this.calculateAnswers() + "%"}
               textStyle={{ color: "orange" }}
             />
             <Text style={styles.text}>of questions correctly!!!</Text>
