@@ -43,17 +43,17 @@ class QuizBuilder extends Component {
   }
   renderQuiz() {
     //shuffleArray(this.props.quizConfig.quizData.results)
-    return <QuizList styles={this.props.styles} />;
+    return <QuizList styles={styles} />;
   }
 
   renderResult() {
     //restart the game data
     this.loadDataFromApi();
-    return <Result styles={this.props.styles} />;
+    return <Result styles={styles} />;
   }
   loadingScreen() {
     return (
-      <View style={[this.props.styles.container, this.props.styles.horizontal]}>
+      <View style={[styles.container, styles.horizontal]}>
         <ActivityIndicator size="large" color="#0000ff" />
       </View>
     );
@@ -82,5 +82,125 @@ const mapStateToProps = state => {
     quizConfig: state.quizReducer
   };
 };
+const styles = {
+  container: {
+    flex: 1,
+    backgroundColor: "#374046"
+  },
+  halfHeight: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 0.5,
+   // backgroundColor: "#FF3366"
+  },
+  quarterHeight: {
+    flex: 0.25,
+    backgroundColor: "#000"
+  },
 
+  navBar: {
+    flexDirection: "row",
+    paddingTop: 30,
+    height: 64,
+    backgroundColor: "#1EAAF1"
+  },
+  navBarButton: {
+    color: "#FFFFFF",
+    textAlign: "center",
+    width: 64
+  },
+  navBarHeader: {
+    flex: 1,
+    color: "#FFFFFF",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+
+  content: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white"
+  },
+  text: {
+    color: "#EEEEEE"
+  },
+  
+  halfView: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+    backgroundColor: "red"
+  },
+
+  questionView: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+    flexDirection: "column",
+    //backgroundColor: "red",
+    marginLeft: 10,
+    marginRight: 10
+
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10
+  },
+  tabBar: {
+    flexDirection: "row",
+    height: 50
+  },
+  tabBarButton: {
+    flex: 1
+  },
+  button1: { backgroundColor: "#8BC051" },
+  button2: { backgroundColor: "#CCD948" },
+  button3: { backgroundColor: "#FDE84D" },
+  button4: { backgroundColor: "#FCBF2E" },
+  button5: { backgroundColor: "#FC9626" },
+  question: {
+    flex: 2,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textQuestionCategory:{
+    color: "#EEEEEE",
+    fontWeight: 'bold'
+
+  },
+  textQuestion:{
+    color: "#EEEEEE",
+    
+
+  },
+  answer: {
+    flex: 1,
+    backgroundColor: "black",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  answerButtons: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#374046"
+  },
+  buttonPlayAgain:{
+    backgroundColor: "transparent",
+    borderColor: "white",
+    borderWidth: 1
+  },
+  buttonAnswer: {
+    backgroundColor: "transparent",
+    borderColor: "white",
+    borderWidth: 1
+  },
+  textButtonAnswer: {
+    color: "white"
+  }
+};
 export default connect(mapStateToProps, quizActions)(QuizBuilder);

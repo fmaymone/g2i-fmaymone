@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Button } from 'react-native'
 import QuizList from './components/Quiz/QuizList'
 import reducers from './reducers'
 import { Provider } from 'react-redux'
@@ -12,6 +12,13 @@ import update from 'react-addons-update'
 import Result from './components/Result/Result'
 import QuizBuilder from './containers/QuizBuilder'
 import * as quizActions from "./actions/quizActions";
+import { StackNavigator } from 'react-navigation';
+import RootStack from './screens/RootStack'
+
+
+
+
+
 
 
 
@@ -19,14 +26,16 @@ export default class App extends React.Component {
 
 
   render() {
-    return (
+    return(
       <Provider store={createStore(reducers)}>
-          <QuizBuilder styles={styles} />   
-          {/* <Test styles={styles} /> */}
-     </Provider>
-    );
+        <RootStack />   
+            {/* <Test styles={styles} /> */}
+      </Provider>
+    )
+    
   }
 }
+
 
 const styles = {
   container: {
