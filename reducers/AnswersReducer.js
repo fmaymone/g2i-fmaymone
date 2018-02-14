@@ -1,4 +1,4 @@
-import { ADD_ANSWER_QUIZ, UPDATE_ANSWER_QUIZ} from '../actions/types'
+import { ADD_ANSWER_QUIZ, UPDATE_ANSWER_QUIZ, RESET_ANSWER_QUIZ } from '../actions/types'
 
 const initialStateAnswers = {
     answers: []
@@ -18,6 +18,10 @@ export default (state = initialStateAnswers, action) => {
             state.answers.pop(obj)
             return { ...state, answers: state.answers.concat(action.payload) }
         }
+
+        case RESET_ANSWER_QUIZ:
+        return { ...state, answers: [] }
+
         
             
         case UPDATE_ANSWER_QUIZ:

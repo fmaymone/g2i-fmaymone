@@ -10,8 +10,15 @@ class Result extends Component {
   handlePlayAgain = () => {
     //restart the quiz
     this.props.finishQuiz(false);
+    this.resetAnswers()
     this.props.selectQuiz(0);
   };
+
+  resetAnswers(){
+
+    this.props.resetAnswerQuiz()
+
+  }
 
   calculateAnswers = () => {
     const answers = this.props.answers.answers;

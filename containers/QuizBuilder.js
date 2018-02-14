@@ -46,9 +46,16 @@ class QuizBuilder extends Component {
     return <QuizList styles={styles} />;
   }
 
+  resetAnswers(){
+
+    this.props.resetAnswerQuiz()
+
+  }
+
   renderResult() {
-    //restart the game data
-    this.loadDataFromApi();
+    
+    this.loadDataFromApi()
+   
     return <Result styles={styles} />;
   }
   loadingScreen() {
