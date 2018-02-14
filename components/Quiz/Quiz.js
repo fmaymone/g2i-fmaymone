@@ -85,7 +85,7 @@ class Quiz extends Component {
         <View style={styles.question}>
           <Card title={"Category: " + category } style={styles.questionView}>
             <View><Text style={{ marginBottom: 10 }}>{question}</Text></View>
-            <View><Text style={{ marginTop: 50 ,  textAlign: "center" }}>YOUR ANSWER: {this.state.userAnswer}</Text></View>
+            
           </Card>
         </View>
         <View style={styles.answer}>
