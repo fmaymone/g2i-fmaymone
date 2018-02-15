@@ -46,11 +46,7 @@ class QuizBuilder extends Component {
     return <QuizList styles={styles} />;
   }
 
-  resetAnswers(){
 
-    this.props.resetAnswerQuiz()
-
-  }
 
   renderResult() {
     
@@ -69,7 +65,7 @@ class QuizBuilder extends Component {
     const { quizData, isLoading, error } = this.state;
 
     if (error) {
-      return <p>{error.message}</p>;
+      return <View>{error.message}</View>;
     }
 
     if (isLoading) {
