@@ -65,14 +65,15 @@ class Quiz extends Component {
   };
 
   render() {
-    const { correct_answer, question } = this.props.quiz;
+    const { correct_answer, question, category } = this.props.quiz;
 
     const answers = this.processAnswers();
     const styles = this.props.styles;
-    let icon = null;
+    
 
     return (
       <View style={styles.content}>
+      <View><Text>Category: {category}</Text></View>
         <View style={styles.question}>
           <View style={styles.questionView}>
             <HTML
