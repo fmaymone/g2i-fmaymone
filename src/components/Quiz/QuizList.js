@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 import {
   StyleSheet,
   Text,
@@ -6,16 +6,17 @@ import {
   Button,
   View,
   ScrollView
-} from "react-native";
-import { connect } from "react-redux";
-import Quiz from "./Quiz";
-import * as quizActions from "../../actions/quizActions";
+} from "react-native"
+import { connect } from "react-redux"
+import Quiz from "./Quiz"
+import * as quizActions from "../../actions/quizActions"
+import PropTypes from 'prop-types';
 
 class QuizList extends Component {
   render() {
-    const currentQuestion = this.props.currentQuestion;
-    const questions = this.props.quiz_data.results;
-    const styles = this.props.styles;
+    const currentQuestion = this.props.currentQuestion
+    const questions = this.props.quiz_data.results
+    const styles = this.props.styles
 
     return (
       <View style={styles.container}>
@@ -23,7 +24,7 @@ class QuizList extends Component {
           <Quiz quiz={questions[currentQuestion]} styles={styles} />
         </View>
       </View>
-    );
+    )
   }
 }
 const mapStateToProps = state => {
@@ -31,7 +32,13 @@ const mapStateToProps = state => {
     quiz_data: state.quizReducer.quizData,
     currentQuestion: state.selectionReducer,
     quizConfig: state.quizReducer
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, quizActions)(QuizList);
+QuizList.propTypes = {
+  currentQuestion: PropTypes.number,
+  quizData: PropTypes.object,
+  question: PropTypes.object
+}
+
+export default connect(mapStateToProps, quizActions)(QuizList)

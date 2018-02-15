@@ -11,7 +11,7 @@ export default (state = initialStateAnswers, action) => {
 
         //check if the object already exists
         var obj = state.answers.find(function (obj) { 
-            return obj.id === action.payload.id });
+            return obj.id === action.payload.id })
         if(obj == null){
             return { ...state, answers: state.answers.concat(action.payload) }
         }else{
@@ -25,7 +25,7 @@ export default (state = initialStateAnswers, action) => {
         
             
         case UPDATE_ANSWER_QUIZ:
-            return { ...state, [action.payload.prop]: action.payload.value };
+            return { ...state, [action.payload.prop]: action.payload.value }
          default:
             return state
     }

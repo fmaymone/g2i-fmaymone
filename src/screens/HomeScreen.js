@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
-import { Button } from "react-native-elements";
-import HeaderButton from "../components/Layout/HeaderButton";
-import { StackNavigator } from "react-navigation";
-import Icon from "react-native-vector-icons/Feather";
+import React, { Component } from "react"
+import { StyleSheet, Text, View, TouchableHighlight } from "react-native"
+import { Button } from "react-native-elements"
+import HeaderButton from "../components/Layout/HeaderButton"
+import { StackNavigator } from "react-navigation"
+import Icon from "react-native-vector-icons/Feather"
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
     title: "Home"
-  };
+  }
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation
     return (
       <View style={styles.centerContainer}>
         <View style={styles.centerContainer}>
@@ -51,10 +51,10 @@ class HomeScreen extends React.Component {
           </View>
         </View>
       </View>
-    );
+    )
   }
 }
-export default HomeScreen;
+export default HomeScreen
 
 const styles = {
   centerContainer: { flex: 1, alignItems: "center", justifyContent: "center" },
@@ -73,4 +73,4 @@ const styles = {
     justifyContent: "center",
     flex: 1
   }
-};
+}

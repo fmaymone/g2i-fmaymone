@@ -1,31 +1,31 @@
-import React, { Component } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
-import HeaderButton from "../components/Layout/HeaderButton";
-import RadioButton from "radio-button-react-native";
-import { connect } from "react-redux";
-import * as quizActions from "../actions/quizActions";
+import React, { Component } from "react"
+import { Button, StyleSheet, Text, View } from "react-native"
+import HeaderButton from "../components/Layout/HeaderButton"
+import RadioButton from "radio-button-react-native"
+import { connect } from "react-redux"
+import * as quizActions from "../actions/quizActions"
 
 import {
   LEVEL_HARD,
   LEVEL_MEDIUM,
   LEVEL_EASY
-} from "../config/QuizConfiguration";
+} from "../config/QuizConfiguration"
 
 class Configuration extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       numberQuestions: 10,
       level: LEVEL_MEDIUM
-    };
+    }
   }
   handleQuestionsOnPress(value) {
-    //this.setState({ numberQuestions: value });
-    this.props.setNumberQuestions(value);
+    //this.setState({ numberQuestions: value })
+    this.props.setNumberQuestions(value)
   }
   handleLevelOnPress(value) {
-    //this.setState({ level: value });
-    this.props.setLevelQuiz(value);
+    //this.setState({ level: value })
+    this.props.setLevelQuiz(value)
   }
   render() {
     return (
@@ -102,15 +102,15 @@ class Configuration extends Component {
           </View>
         </View>
       </View>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => {
   return {
     quizConfig: state.quizReducer
-  };
-};
+  }
+}
 
 const styles = {
   container: {
@@ -136,5 +136,5 @@ const styles = {
     
     //alignItems: "center"
   }
-};
-export default connect(mapStateToProps, quizActions)(Configuration);
+}
+export default connect(mapStateToProps, quizActions)(Configuration)

@@ -1,43 +1,41 @@
-import React, { Component } from "react"
-import { Text, View } from "react-native"
-import { Badge, Button } from "react-native-elements"
-import { connect } from "react-redux"
-import { APP_TITLE } from "../../config/QuizConfiguration"
-import * as quizActions from "../../actions/quizActions"
-import { shuffleArray } from "../../util/functions"
+import React, { Component } from "react";
+import { Text, View } from "react-native";
+import { Badge, Button } from "react-native-elements";
+import { connect } from "react-redux";
+import { APP_TITLE } from "../../config/QuizConfiguration";
+import * as quizActions from "../../actions/quizActions";
+import { shuffleArray } from "../../util/functions";
+import PropTypes from "prop-types";
 
 class Result extends Component {
   handlePlayAgain = () => {
     //restart the quiz
-    this.props.finishQuiz(false)
-    this.resetAnswers()
-    this.props.selectQuiz(0)
-  }
+    this.props.finishQuiz(false);
+    this.resetAnswers();
+    this.props.selectQuiz(0);
+  };
 
-  resetAnswers(){
-
-    this.props.resetAnswerQuiz()
-
+  resetAnswers() {
+    this.props.resetAnswerQuiz();
   }
 
   calculateAnswers = () => {
-    const answers = this.props.answers.answers
-    let rightAnswers = 0
+    const answers = this.props.answers.answers;
+    let rightAnswers = 0;
 
     answers.forEach(element => {
       if (element.value.isCorrect) {
-        rightAnswers++
+        rightAnswers++;
       }
-    })
+    });
 
-    return (rightAnswers / answers.length * 100).toFixed(2)
-  }
+    return (rightAnswers / answers.length * 100).toFixed(2);
+  };
   render() {
-    const styles = this.props.styles
+    const styles = this.props.styles;
 
     return (
       <View style={styles.container}>
-      
         <View style={styles.halfHeight}>
           <View style={styles.halfHeight}>
             <Text style={styles.text}>Congratulations!!!</Text>
@@ -62,7 +60,7 @@ class Result extends Component {
           </View>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -70,7 +68,9 @@ const mapStateToProps = state => {
   return {
     quiz_data: state.quiz_data,
     answers: state.answersReducer
-  }
-}
-
-export default connect(mapStateToProps, quizActions)(Result)
+  };
+};
+Result.propTypes = {
+  answers: PropTypes.object
+};
+export default connect(mapStateToProps, quizActions)(Result);

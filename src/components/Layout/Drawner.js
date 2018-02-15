@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   Button,
   StyleSheet,
   Text,
   View
-} from 'react-native';
+} from 'react-native'
 
 export default class Drawer extends Component {
 
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         <Text style={styles.header}>
@@ -24,7 +24,7 @@ export default class Drawer extends Component {
           title="Close Me"
         />
       </View>
-    );
+    )
   }
 
 }
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginVertical: 20,
   },
-});
+})

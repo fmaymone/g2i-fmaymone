@@ -5,8 +5,8 @@ export default (state = 0, action) => {
       case CHANGE_QUESTION_QUIZ:
         return action.payload
       case RESET_QUIZ:
-        return 0;
+        return 0
       default:
         return state
     }
-  };
+  }

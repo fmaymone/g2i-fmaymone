@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import {
   StyleSheet,
   View
-} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+} from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 export default class HeaderButton extends Component {
 
   static propTypes = {
     onPress: PropTypes.func.isRequired,
     icon: PropTypes.string.isRequired,
-  };
+  }
 
   static defaultProps = {
     icon: 'md-menu',
-  };
+  }
 
   render() {
     return (
@@ -28,7 +28,7 @@ export default class HeaderButton extends Component {
           onPress={this.props.onPress}
         />
       </View>
-    );
+    )
   }
 
 }
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
     top: 20,
     left: 5,
   },
-});
+})
