@@ -30,55 +30,76 @@ class Configuration extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View>
-          <RadioButton
-            currentValue={this.props.quizConfig.numberQuestions}
-            value={5}
-            onPress={this.handleQuestionsOnPress.bind(this)}
+        <View style={styles.radioButtonContainer}>
+          <View
+            style={{
+            //   justifyContent: "center",
+            //   alignItems: "center"
+            }}
           >
-            <Text>5</Text>
-          </RadioButton>
+            <Text>Number of Questions:</Text>
+          </View>
+          <View style={styles.elementsRadioButton}>
+            <RadioButton
+              currentValue={this.props.quizConfig.numberQuestions}
+              value={5}
+              onPress={this.handleQuestionsOnPress.bind(this)}
+            >
+              <Text>5</Text>
+            </RadioButton>
 
-          <RadioButton
-            currentValue={this.props.quizConfig.numberQuestions}
-            value={10}
-            onPress={this.handleQuestionsOnPress.bind(this)}
-          >
-            <Text>10</Text>
-          </RadioButton>
+            <RadioButton
+              currentValue={this.props.quizConfig.numberQuestions}
+              value={10}
+              onPress={this.handleQuestionsOnPress.bind(this)}
+            >
+              <Text>10</Text>
+            </RadioButton>
 
-          <RadioButton
-            currentValue={this.props.quizConfig.numberQuestions}
-            value={30}
-            onPress={this.handleQuestionsOnPress.bind(this)}
-          >
-            <Text>30</Text>
-          </RadioButton>
+            <RadioButton
+              currentValue={this.props.quizConfig.numberQuestions}
+              value={30}
+              onPress={this.handleQuestionsOnPress.bind(this)}
+            >
+              <Text>30</Text>
+            </RadioButton>
+          </View>
         </View>
-        <View>
-          <RadioButton
-            currentValue={this.props.quizConfig.level}
-            value={LEVEL_EASY}
-            onPress={this.handleLevelOnPress.bind(this)}
-          >
-            <Text>Easy</Text>
-          </RadioButton>
 
-          <RadioButton
-            currentValue={this.props.quizConfig.level}
-            value={LEVEL_MEDIUM}
-            onPress={this.handleLevelOnPress.bind(this)}
+        <View style={styles.radioButtonContainer}>
+          <View
+            style={{
+            //   justifyContent: "center",
+            //   alignItems: "center"
+            }}
           >
-            <Text>Medium</Text>
-          </RadioButton>
+            <Text>Level of Questions:</Text>
+          </View>
+          <View style={styles.elementsRadioButton}>
+            <RadioButton
+              currentValue={this.props.quizConfig.level}
+              value={LEVEL_EASY}
+              onPress={this.handleLevelOnPress.bind(this)}
+            >
+              <Text>Easy</Text>
+            </RadioButton>
 
-          <RadioButton
-            currentValue={this.props.quizConfig.level}
-            value={LEVEL_HARD}
-            onPress={this.handleLevelOnPress.bind(this)}
-          >
-            <Text>Hard</Text>
-          </RadioButton>
+            <RadioButton
+              currentValue={this.props.quizConfig.level}
+              value={LEVEL_MEDIUM}
+              onPress={this.handleLevelOnPress.bind(this)}
+            >
+              <Text>Medium</Text>
+            </RadioButton>
+
+            <RadioButton
+              currentValue={this.props.quizConfig.level}
+              value={LEVEL_HARD}
+              onPress={this.handleLevelOnPress.bind(this)}
+            >
+              <Text>Hard</Text>
+            </RadioButton>
+          </View>
         </View>
       </View>
     );
@@ -94,13 +115,26 @@ const mapStateToProps = state => {
 const styles = {
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column"
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
   },
   header: {
     fontSize: 20,
     marginVertical: 20
+  },
+  radioButtonContainer: {
+    flex: 1,
+    justifyContent: "center",
+    flexDirection: "column",
+    
+  },
+  elementsRadioButton: {
+    justifyContent: "center",
+    flexDirection: "column",
+    margin: 10,
+    
+    //alignItems: "center"
   }
 };
 export default connect(mapStateToProps, quizActions)(Configuration);
