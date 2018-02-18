@@ -1,116 +1,106 @@
-import React, { Component } from "react"
-import { Button, StyleSheet, Text, View } from "react-native"
-import HeaderButton from "../components/Layout/HeaderButton"
-import RadioButton from "radio-button-react-native"
-import { connect } from "react-redux"
-import * as quizActions from "../actions/quizActions"
+import React, { Component } from "react";
+import { Button, StyleSheet, Text, View } from "react-native";
+import HeaderButton from "../components/Layout/HeaderButton";
+import RadioButton from "radio-button-react-native";
+import { connect } from "react-redux";
+import * as quizActions from "../actions/quizActions";
 
 import {
   LEVEL_HARD,
   LEVEL_MEDIUM,
   LEVEL_EASY
-} from "../config/QuizConfiguration"
+} from "../config/QuizConfiguration";
+
+const optionsDifficulty = {
+  values: [
+    { title: "Easy", value: LEVEL_EASY },
+    { title: "Medium", value: LEVEL_MEDIUM },
+    { title: "hard", value: LEVEL_HARD }
+  ]
+};
+const optionsNumberQuestions = {
+  values: [
+    { title: "5", value: 5 },
+    { title: "10", value: 10 },
+    { title: "30", value: 30 }
+  ]
+};
 
 class Configuration extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       numberQuestions: 10,
       level: LEVEL_MEDIUM
-    }
+    };
   }
+  renderNumberQuestions = () => {
+    return(<View style={styles.radioButtonContainer}>
+      <View style={{}}>
+        <Text>Number of Questions:</Text>
+      </View>
+      <View style={styles.elementsRadioButton}>
+        {optionsNumberQuestions.values.map((u, i) => {
+          {
+            return this.renderRadioElement(
+              u.title,
+              u.value,
+              (onPress = this.handleQuestionsOnPress.bind(this)),
+              (prop = this.props.quizConfig.numberQuestions)
+            );
+          }
+        })}
+      </View>
+      </View>);
+  };
+  renderLevelQuestions = () => {
+    return(<View style={styles.radioButtonContainer}>
+      <View>
+        <Text>Level of Questions:</Text>
+      </View>
+      <View style={styles.elementsRadioButton}>
+        {optionsDifficulty.values.map((u, i) => {
+          {
+            return this.renderRadioElement(
+              u.title,
+              u.value,
+              (onPress = this.handleLevelOnPress.bind(this)),
+              (prop = this.props.quizConfig.level)
+            );
+          }
+        })}
+      </View>
+      </View>);
+  };
+  renderRadioElement = (title, value, onPress, prop) => {
+    return (
+      <RadioButton currentValue={prop} value={value} onPress={onPress}>
+        <Text>{title}</Text>
+      </RadioButton>
+    );
+  };
+
   handleQuestionsOnPress(value) {
-    //this.setState({ numberQuestions: value })
-    this.props.setNumberQuestions(value)
+    this.props.setNumberQuestions(value);
   }
   handleLevelOnPress(value) {
-    //this.setState({ level: value })
-    this.props.setLevelQuiz(value)
+    this.props.setLevelQuiz(value);
   }
   render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.radioButtonContainer}>
-          <View
-            style={{
-            //   justifyContent: "center",
-            //   alignItems: "center"
-            }}
-          >
-            <Text>Number of Questions:</Text>
-          </View>
-          <View style={styles.elementsRadioButton}>
-            <RadioButton
-              currentValue={this.props.quizConfig.numberQuestions}
-              value={5}
-              onPress={this.handleQuestionsOnPress.bind(this)}
-            >
-              <Text>5</Text>
-            </RadioButton>
-
-            <RadioButton
-              currentValue={this.props.quizConfig.numberQuestions}
-              value={10}
-              onPress={this.handleQuestionsOnPress.bind(this)}
-            >
-              <Text>10</Text>
-            </RadioButton>
-
-            <RadioButton
-              currentValue={this.props.quizConfig.numberQuestions}
-              value={30}
-              onPress={this.handleQuestionsOnPress.bind(this)}
-            >
-              <Text>30</Text>
-            </RadioButton>
-          </View>
-        </View>
-
-        <View style={styles.radioButtonContainer}>
-          <View
-            style={{
-            //   justifyContent: "center",
-            //   alignItems: "center"
-            }}
-          >
-            <Text>Level of Questions:</Text>
-          </View>
-          <View style={styles.elementsRadioButton}>
-            <RadioButton
-              currentValue={this.props.quizConfig.level}
-              value={LEVEL_EASY}
-              onPress={this.handleLevelOnPress.bind(this)}
-            >
-              <Text>Easy</Text>
-            </RadioButton>
-
-            <RadioButton
-              currentValue={this.props.quizConfig.level}
-              value={LEVEL_MEDIUM}
-              onPress={this.handleLevelOnPress.bind(this)}
-            >
-              <Text>Medium</Text>
-            </RadioButton>
-
-            <RadioButton
-              currentValue={this.props.quizConfig.level}
-              value={LEVEL_HARD}
-              onPress={this.handleLevelOnPress.bind(this)}
-            >
-              <Text>Hard</Text>
-            </RadioButton>
-          </View>
-        </View>
-      </View>
-    )
+    
+  return (<View style={styles.container} >
+    {this.renderLevelQuestions()}
+    {this.renderNumberQuestions()}
+  
+  </View>);
   }
 }
 
 const mapStateToProps = state => {
   return {
     quizConfig: state.quizReducer
-  }
-}
+  };
+};
 
 const styles = {
   container: {
@@ -126,15 +116,14 @@ const styles = {
   radioButtonContainer: {
     flex: 1,
     justifyContent: "center",
-    flexDirection: "column",
-    
+    flexDirection: "column"
   },
   elementsRadioButton: {
     justifyContent: "center",
     flexDirection: "column",
-    margin: 10,
-    
+    margin: 10
+
     //alignItems: "center"
   }
-}
-export default connect(mapStateToProps, quizActions)(Configuration)
+};
+export default connect(mapStateToProps, quizActions)(Configuration);
