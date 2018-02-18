@@ -50,7 +50,17 @@ class Result extends Component {
             <Text style={styles.text}>Congratulations!!!</Text>
           </View>
 
+          
           <View style={styles.halfHeight}>
+            <Text style={styles.text}>You answer</Text>
+            <Badge
+              value={this.calculateAnswers() + "%"}
+              textStyle={{ color: "orange" }}
+            />
+            <Text style={styles.text}>of questions correctly!!!</Text>
+          </View>
+        </View>
+        <View style={styles.halfHeight}>
             <ScrollView>
               {answers.map((u, i) => {
                 return (
@@ -61,15 +71,6 @@ class Result extends Component {
               })}
             </ScrollView>
           </View>
-          <View style={styles.halfHeight}>
-            <Text style={styles.text}>You answer</Text>
-            <Badge
-              value={this.calculateAnswers() + "%"}
-              textStyle={{ color: "orange" }}
-            />
-            <Text style={styles.text}>of questions correctly!!!</Text>
-          </View>
-        </View>
         <View style={styles.halfHeight}>
           <View>
             <Button
